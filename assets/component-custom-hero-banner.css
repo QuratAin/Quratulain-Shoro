@@ -82,7 +82,7 @@
 .gift-banner__content {
   position: static;
   text-align: center;
-  padding: 32px 20px 20px;
+  padding: 40px 30px 0px 30px !important;
 }
 
 .gift-banner__heading {
@@ -116,11 +116,12 @@
 }
 
 .gift-banner__bottombar p {
-  margin: 0;
-  font-weight: 400;
-  line-height: 0.84;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+    font-weight: 400;
+    font-style: Regular;
+    line-height: 13.42px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 /* CTA button base styles and interaction states */
@@ -254,7 +255,7 @@
   .gift-banner__content {
     background: #fff;
     text-align: left;
-    padding: 40px 30px 0px 30px !important;
+    padding: 56px 48px 56px 72px;
   }
 
   .gift-banner__description--mobile {
@@ -304,5 +305,9 @@
     width: 193px;
     height: 45px;
     padding: 11px 0px 11px 30px;
+  }
+
+  .gift-banner__bottombar {
+    padding: 20px 10px;
   }
 }
