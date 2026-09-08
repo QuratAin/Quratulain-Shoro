@@ -269,7 +269,7 @@
   }
 
   .gift-banner__btn--shop {
-    position: static;
+    position: relative;
     transform: none;
     left: auto;
     bottom: auto;
