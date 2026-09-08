@@ -25,3 +25,22 @@
     font-size: 40px;
   }
 }
+
+.shoppable-tile {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.shoppable-tile__media {
+  position: absolute;
+  inset: 0;
+}
+
+.shoppable-tile__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
