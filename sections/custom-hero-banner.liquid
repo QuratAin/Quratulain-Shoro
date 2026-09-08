@@ -1,0 +1,25 @@
+{{  'components/hero-banner.css' | asset_url | stylesheet_tag }}
+
+<div>
+    custom hero banner
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Hero Banner",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Custom Hero Banner"
+        },
+        {
+            "type": "textarea",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "This is a custom hero banner section."
+        }
+    ]
+  }
+{% endschema %}
