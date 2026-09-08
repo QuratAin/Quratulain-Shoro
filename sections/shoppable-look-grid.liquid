@@ -10,10 +10,23 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign bundle_product = section.settings.bundle_product
+  assign bundle_variant = bundle_product.first_available_variant
+  assign bundle_available = false
+  if bundle_variant != blank
+    assign bundle_available = true
+  endif
+-%}
 
 <div
   id="ShopTheLook-{{ section.id }}"
   class="shoppable-grid-section color-{{ section.settings.color_scheme }}"
+  data-bundle-trigger-a="{{ section.settings.bundle_trigger_value_1 | escape }}"
+  data-bundle-trigger-b="{{ section.settings.bundle_trigger_value_2 | escape }}"
+  data-bundle-variant-id="{{ bundle_variant.id }}"
+  data-bundle-available="{{ bundle_available }}"
+  data-bundle-message="{{ section.settings.bundle_message | escape }}"
 >
   <div class="page-width">
     {%- if section.settings.heading != blank -%}
