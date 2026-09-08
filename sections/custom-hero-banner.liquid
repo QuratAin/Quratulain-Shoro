@@ -1,0 +1,676 @@
+{{ 'component-custom-hero-banner.css' | asset_url | stylesheet_tag }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap" rel="stylesheet">
+
+{%- style -%}
+  /* Theme variables and responsive sizing for the gift banner */
+  #GiftBanner-{{ section.id }} {
+    --gb-topbar-bg: {{ section.settings.top_bar_bg }};
+    --gb-bottombar-bg: {{ section.settings.bottom_bar_bg }};
+    --gb-bg: {{ section.settings.background_color }};
+    --gb-heading-color: {{ section.settings.heading_color }};
+    --gb-text-color: {{ section.settings.description_color }};
+    --gb-topbar-text-color: {{ section.settings.top_bar_text_color }};
+    --gb-bottombar-text-color: {{ section.settings.bottom_bar_text_color }};
+
+    --gb-choose-bg: {{ section.settings.choose_gift_bg }};
+    --gb-choose-text: {{ section.settings.choose_gift_text }};
+    --gb-choose-hover-bg: {{ section.settings.choose_gift_hover_bg }};
+    --gb-choose-hover-text: {{ section.settings.choose_gift_hover_text }};
+
+    --gb-shop-bg: {{ section.settings.shop_now_bg }};
+    --gb-shop-text: {{ section.settings.shop_now_text }};
+    --gb-shop-hover-bg: {{ section.settings.shop_now_hover_bg }};
+    --gb-shop-hover-text: {{ section.settings.shop_now_hover_text }};
+
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #GiftBanner-{{ section.id }} .gift-banner__topbar-text {
+    font-size: {{ section.settings.top_bar_font_size_mobile }}px;
+  }
+
+  #GiftBanner-{{ section.id }} .gift-banner__bottombar p {
+    font-size: {{ section.settings.bottom_bar_font_size_mobile }}px;
+  }
+
+  #GiftBanner-{{ section.id }} .gift-banner__heading {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+  }
+
+  #GiftBanner-{{ section.id }} .gift-banner__description {
+    font-size: {{ section.settings.description_font_size_mobile }}px;
+  }
+
+  #GiftBanner-{{ section.id }} .gift-banner__btn--choose {
+    font-size: {{ section.settings.choose_gift_font_size_mobile }}px;
+  }
+
+  #GiftBanner-{{ section.id }} .gift-banner__btn--shop {
+    font-size: {{ section.settings.shop_now_font_size_mobile }}px;
+  }
+
+  #GiftBanner-{{ section.id }} .gift-banner__content {
+    max-width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    #GiftBanner-{{ section.id }} .gift-banner__topbar-text {
+      font-size: {{ section.settings.top_bar_font_size }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__bottombar p {
+      font-size: {{ section.settings.bottom_bar_font_size }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__description {
+      font-size: {{ section.settings.description_font_size }}px;
+      max-width: {{ section.settings.content_max_width }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__btn--choose {
+      font-size: {{ section.settings.choose_gift_font_size }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__btn--shop {
+      font-size: {{ section.settings.shop_now_font_size }}px;
+      position: relative;
+      transform: none;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__main {
+      min-height: 640px;
+      display: block;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__content {
+      position: relative;
+      z-index: 1;
+      text-align: left;
+      max-width: {{ section.settings.content_max_width }}px;
+      padding: {{ section.settings.content_padding_top }}px {{ section.settings.content_padding_left }}px {{ section.settings.content_padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<!-- Gift banner main wrapper: top strip, hero media, and copy block -->
+<div class="gift-banner color-{{ section.settings.color_scheme }}" id="GiftBanner-{{ section.id }}">
+  <div class="gift-banner__topbar">
+    <button
+      type="button"
+      class="gift-banner__hamburger"
+      aria-label="{{ 'general.menu' | t: default: 'Menu' }}"
+      aria-controls="GiftBannerMobileMenu-{{ section.id }}"
+      aria-expanded="false"
+    >
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 6H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1 1H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1 11H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <a href="{{ routes.root_url }}" class="gift-banner__logo" aria-label="{{ section.settings.logo_text | default: shop.name }}">
+      {%- if section.settings.logo_image -%}
+        <img
+          src="{{ section.settings.logo_image | image_url: width: 400 }}"
+          width="{{ section.settings.logo_image.width }}"
+          height="{{ section.settings.logo_image.height }}"
+          alt="{{ section.settings.logo_image.alt | default: section.settings.logo_text }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <svg viewBox="0 0 404 51" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M363.402 0.000305176L395.565 32.1628V1.93269L396.532 0.964852H402.883L403.85 1.93269V50.6604H402.33L370.72 19.0509V49.6958L369.752 50.6604H363.402L362.438 49.6958V0.964852L363.402 0.000305176Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M213.391 0.000152588L225.953 30.3027L238.515 0.000152588H247.486L226.918 49.699L225.953 50.6668L224.985 49.699L204.417 0.000152588H213.391Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M287.641 0.000305176C292.474 0.000305176 297.056 2.52524 299.581 6.21225L294.752 11.0449H293.231C292.23 8.90508 290.028 7.59487 287.641 7.59487C284.8 7.59487 282.137 9.93217 281.979 12.9081C281.864 15.1466 282.891 16.5457 284.745 17.7407C286.739 19.0279 287.556 19.5645 290.265 21.0524C293.218 22.6754 300.688 25.8587 300.688 34.2368C300.688 42.4963 293.784 50.1798 284.88 50.1798C283.737 50.1798 281.667 50.0514 280.119 49.6958C275.757 48.6391 273.111 46.9898 270.25 43.6222L276.462 37.272L278.602 39.0661C279.566 39.8232 281.686 41.3474 283.704 41.6206C287.806 42.177 290.558 39.4644 291.091 36.788C291.516 34.6746 290.98 31.5209 287.572 29.8881C287.572 29.8881 281.43 26.4743 278.737 24.9172C275.994 23.3305 273.078 18.9982 273.078 13.8068C273.078 9.94205 274.849 6.19908 277.703 3.59184C279.909 1.57057 282.934 0.000305176 287.641 0.000305176Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M262.075 0.000305176V48.7313L261.107 49.6958H253.792V0.968144L254.757 0.000305176H262.075Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M331.317 0.000305176C337.907 0.000305176 344.227 2.61819 348.887 7.27805C353.546 11.9379 356.164 18.258 356.164 24.8481C356.164 31.4381 353.546 37.7582 348.887 42.4181C344.227 47.078 337.907 49.6958 331.317 49.6958C324.726 49.6958 318.406 47.078 313.746 42.4181C309.087 37.7582 306.469 31.4381 306.469 24.8481C306.469 18.258 309.087 11.9379 313.746 7.27805C318.406 2.61819 324.726 0.000305176 331.317 0.000305176ZM331.313 8.28619C329.138 8.2864 326.983 8.71513 324.973 9.54789C322.964 10.3807 321.137 11.6011 319.599 13.1397C316.493 16.2469 314.748 20.4609 314.748 24.8547C314.748 29.2485 316.494 33.4621 319.602 36.5687C322.709 39.6753 326.923 41.4203 331.317 41.4198C335.71 41.4198 339.924 39.6744 343.031 36.5675C346.138 33.4606 347.883 29.2468 347.883 24.853C347.883 20.4592 346.138 16.2454 343.031 13.1385C339.924 10.0316 335.71 8.28619 331.317 8.28619H331.313Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M66.7665 0.000152588C71.5991 0.000152588 76.1815 2.52509 78.7064 6.2121L73.8771 11.0447H72.3562C71.3555 8.90492 69.1531 7.59472 66.7665 7.59472C63.9255 7.59472 61.2623 9.93202 61.1043 12.908C60.9891 15.1465 62.0162 16.5456 63.8695 17.7406C65.8645 19.0277 66.6809 19.5643 69.3902 21.0523C72.3431 22.6752 79.8125 25.8586 79.8125 34.2366C79.8125 42.4962 72.9093 50.1796 64.0045 50.1796C62.8622 50.1796 60.7915 50.0512 59.2443 49.6957C54.8825 48.639 52.2357 46.9897 49.375 43.622L55.5869 37.2718L57.7267 39.0659C58.6913 39.8231 60.8113 41.3473 62.8293 41.6205C66.9311 42.1768 69.6831 39.4643 70.2164 36.7879C70.6411 34.6744 70.1045 31.5207 66.6973 29.8879C66.6973 29.8879 60.5545 26.4742 57.8617 24.9171C55.1195 23.3303 52.2028 18.9981 52.2028 13.8067C52.2028 9.94189 53.9739 6.19893 56.828 3.59169C59.0336 1.57042 62.059 0.000152588 66.7665 0.000152588Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M102.985 0.000152588C107.818 0.000152588 112.4 2.52509 114.925 6.2121L110.096 11.0447H108.575C107.574 8.90492 105.372 7.59472 102.985 7.59472C100.144 7.59472 97.4811 9.93202 97.323 12.908C97.2078 15.1465 98.2349 16.5456 100.088 17.7406C102.083 19.0277 102.9 19.5643 105.609 21.0523C108.562 22.6752 116.031 25.8586 116.031 34.2366C116.031 42.4962 109.128 50.1796 100.223 50.1796C99.0809 50.1796 97.0103 50.0512 95.4631 49.6957C91.1012 48.639 88.4545 46.9897 85.5938 43.622L91.8057 37.2718L93.9455 39.0659C94.91 39.8231 97.0301 41.3473 99.048 41.6205C103.15 42.1768 105.902 39.4643 106.435 36.7879C106.86 34.6744 106.323 31.5207 102.916 29.8879C102.916 29.8879 96.7733 26.4742 94.0805 24.9171C91.3382 23.3303 88.4216 18.9981 88.4216 13.8067C88.4216 9.94189 90.1926 6.19893 93.0468 3.59169C95.2524 1.57042 98.2777 0.000152588 102.985 0.000152588Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M41.1996 0.000152588V48.7311L40.2317 49.6957H32.917V0.967991L33.8815 0.000152588H41.1996Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M146.65 0.000152588C153.24 0.000152588 159.56 2.61803 164.22 7.2779C168.879 11.9378 171.497 18.2579 171.497 24.8479C171.497 31.438 168.879 37.7581 164.22 42.4179C159.56 47.0778 153.24 49.6957 146.65 49.6957C140.059 49.6957 133.739 47.0778 129.079 42.4179C124.42 37.7581 121.802 31.438 121.802 24.8479C121.802 18.2579 124.42 11.9378 129.079 7.2779C133.739 2.61803 140.059 0.000152588 146.65 0.000152588ZM146.646 8.28603C144.471 8.28625 142.316 8.71498 140.307 9.54774C138.297 10.3805 136.47 11.601 134.932 13.1395C131.826 16.2467 130.081 20.4607 130.081 24.8545C130.081 29.2483 131.827 33.462 134.935 36.5685C138.042 39.6751 142.256 41.4201 146.65 41.4197C151.043 41.4197 155.257 39.6743 158.364 36.5674C161.471 33.4605 163.216 29.2467 163.216 24.8529C163.216 20.4591 161.471 16.2452 158.364 13.1383C155.257 10.0315 151.043 8.28603 146.65 8.28603H146.646Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M24.8478 0V7.31804L23.8799 8.28259H16.5652V49.6955H8.28259V8.28259H0V0.967838L0.967834 0H24.8478Z" fill="currentColor"/>
+        </svg>
+      {%- endif -%}
+    </a>
+
+    {%- if section.settings.top_bar_text != blank -%}
+      <p class="gift-banner__topbar-text">{{ section.settings.top_bar_text }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.choose_gift_label != blank -%}
+      <a
+        {% if section.settings.choose_gift_link != blank %}
+          href="{{ section.settings.choose_gift_link }}"
+        {% else %}
+          href="#" role="link" aria-disabled="true"
+        {% endif %}
+        class="gift-banner__btn gift-banner__btn--choose"
+      >
+        <span class="gift-banner__btn-fill" aria-hidden="true"></span>
+        <span class="gift-banner__btn-label">
+          {{ section.settings.choose_gift_label }}
+          <svg viewBox="0 0 68 30" fill="none" aria-hidden="true" class="gift-banner__arrow">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.7279L1.96701e-07 12.7279L-1.96701e-07 16.7279L2 16.7279L2 12.7279ZM67.4142 16.1421C68.1953 15.3611 68.1953 14.0947 67.4142 13.3137L54.6863 0.585774C53.9052 -0.195275 52.6389 -0.195275 51.8579 0.585774C51.0768 1.36682 51.0768 2.63315 51.8579 3.4142L63.1716 14.7279L51.8579 26.0416C51.0768 26.8227 51.0768 28.089 51.8579 28.87C52.6389 29.6511 53.9052 29.6511 54.6863 28.87L67.4142 16.1421ZM2 16.7279L66 16.7279L66 12.7279L2 12.7279L2 16.7279Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="gift-banner__main">
+    {%- if section.settings.background_image -%}
+      {%- liquid
+        assign mobile_image = section.settings.mobile_background_image | default: section.settings.background_image
+      -%}
+      <div class="gift-banner__hero-row">
+        <picture>
+          <source
+            media="(max-width: 749px)"
+            srcset="
+              {{ mobile_image | image_url: width: 400 }} 400w,
+              {{ mobile_image | image_url: width: 750 }} 750w,
+              {{ mobile_image | image_url: width: 1100 }} 1100w
+            "
+            sizes="100vw"
+          >
+          <img
+            srcset="
+              {%- if section.settings.background_image.width >= 375 -%}{{ section.settings.background_image | image_url: width: 375 }} 375w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 750 -%}{{ section.settings.background_image | image_url: width: 750 }} 750w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 1100 -%}{{ section.settings.background_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 1500 -%}{{ section.settings.background_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 1780 -%}{{ section.settings.background_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+              {{ section.settings.background_image | image_url: width: 2200 }} 2200w
+            "
+            src="{{ section.settings.background_image | image_url: width: 1780 }}"
+            sizes="100vw"
+            alt=""
+            loading="lazy"
+            width="{{ section.settings.background_image.width }}"
+            height="{{ section.settings.background_image.height }}"
+            class="gift-banner__image"
+          >
+        </picture>
+      </div>
+    {%- endif -%}
+
+    <div class="gift-banner__content-row">
+      <div class="gift-banner__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="gift-banner__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.mobile_description != blank -%}
+          <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.mobile_description }}</div>
+        {%- elsif section.settings.description != blank -%}
+          <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.description }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <div class="gift-banner__description gift-banner__description--desktop">{{ section.settings.description }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.shop_now_label != blank -%}
+          <a
+            {% if section.settings.shop_now_link != blank %}
+              href="{{ section.settings.shop_now_link }}"
+            {% else %}
+              href="#" role="link" aria-disabled="true"
+            {% endif %}
+            class="gift-banner__btn gift-banner__btn--shop"
+          >
+            <span class="gift-banner__btn-fill" aria-hidden="true"></span>
+            <span class="gift-banner__btn-label">
+              {{ section.settings.shop_now_label }}
+              <svg viewBox="0 0 68 30" fill="none" aria-hidden="true" class="gift-banner__arrow">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.7279L1.96701e-07 12.7279L-1.96701e-07 16.7279L2 16.7279L2 12.7279ZM67.4142 16.1421C68.1953 15.3611 68.1953 14.0947 67.4142 13.3137L54.6863 0.585774C53.9052 -0.195275 52.6389 -0.195275 51.8579 0.585774C51.0768 1.36682 51.0768 2.63315 51.8579 3.4142L63.1716 14.7279L51.8579 26.0416C51.0768 26.8227 51.0768 28.089 51.8579 28.87C52.6389 29.6511 53.9052 29.6511 54.6863 28.87L67.4142 16.1421ZM2 16.7279L66 16.7279L66 12.7279L2 12.7279L2 16.7279Z" fill="currentColor"/>
+              </svg>
+            </span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.background_image -%}
+        <div class="gift-banner__feature-image">
+          <picture>
+            <img
+              src="{{ section.settings.background_image | image_url: width: 1780 }}"
+              srcset="
+                {%- if section.settings.background_image.width >= 375 -%}{{ section.settings.background_image | image_url: width: 375 }} 375w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 750 -%}{{ section.settings.background_image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 1100 -%}{{ section.settings.background_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 1500 -%}{{ section.settings.background_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 1780 -%}{{ section.settings.background_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+                {{ section.settings.background_image | image_url: width: 2200 }} 2200w
+              "
+              sizes="100vw"
+              alt=""
+              loading="lazy"
+              width="{{ section.settings.background_image.width }}"
+              height="{{ section.settings.background_image.height }}"
+              class="gift-banner__image"
+            >
+          </picture>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.bottom_bar_text != blank -%}
+    <div class="gift-banner__bottombar">
+      <p>{{ section.settings.bottom_bar_text }}</p>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "The Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top bar"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "TISSO VISON"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image",
+      "info": "Leave empty to use the default TISSO VISON wordmark"
+    },
+    {
+      "type": "text",
+      "id": "top_bar_text",
+      "label": "Top bar message",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "range",
+      "id": "top_bar_font_size",
+      "label": "Top bar text size (desktop)",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "top_bar_font_size_mobile",
+      "label": "Top bar text size (mobile)",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "text",
+      "id": "choose_gift_label",
+      "label": "Button label",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "choose_gift_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "choose_gift_font_size",
+      "label": "Button text size (desktop)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "choose_gift_font_size_mobile",
+      "label": "Button text size (mobile)",
+      "min": 10,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Main content"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background illustration (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "Background illustration (mobile)",
+      "info": "Leave empty to reuse the desktop image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 32,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 82
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description (desktop)",
+      "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "mobile_description",
+      "label": "Description (mobile)",
+      "info": "Leave empty to reuse the desktop description",
+      "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Description text size (desktop)",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_mobile",
+      "label": "Description text size (mobile)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "shop_now_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "shop_now_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "shop_now_font_size",
+      "label": "Button text size (desktop)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 19
+    },
+    {
+      "type": "range",
+      "id": "shop_now_font_size_mobile",
+      "label": "Button text size (mobile)",
+      "min": 10,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Content positioning"
+    },
+    {
+      "type": "paragraph",
+      "content": "Nudge these so the heading/description/button land in the empty area of your background illustration."
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content column width (desktop)",
+      "min": 320,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 640
+    },
+    {
+      "type": "range",
+      "id": "content_padding_left",
+      "label": "Content left offset (desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "content_padding_top",
+      "label": "Content top offset",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "content_padding_bottom",
+      "label": "Content bottom offset",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "text",
+      "id": "bottom_bar_text",
+      "label": "Bottom bar text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+    {
+      "type": "range",
+      "id": "bottom_bar_font_size",
+      "label": "Bottom bar text size (desktop)",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "bottom_bar_font_size_mobile",
+      "label": "Bottom bar text size (mobile)",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_bg",
+      "label": "Top bar background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_text_color",
+      "label": "Top bar text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_bg",
+      "label": "Bottom bar background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_text_color",
+      "label": "Bottom bar text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "\"Choose gift\" button"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_bg",
+      "label": "Background",
+      "default": "#fff544"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_text",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_hover_bg",
+      "label": "Hover background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_hover_text",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "\"Shop now\" button"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_bg",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_text",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_hover_bg",
+      "label": "Hover background",
+      "default": "#fff544"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_hover_text",
+      "label": "Hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Banner"
+    }
+  ]
+}
+{% endschema %}
