@@ -8,10 +8,62 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    padding: 10px 20px;
+    gap: 32px;
+    padding: 12px 60px;
     color: #333;
     background-color: #e0e0e0;
+}
+
+.gift-banner__logo {
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+.gift-banner__logo img,
+.gift-banner__logo svg {
+    height: 24px;
+    width: auto;
+    display: block;
+}
+
+.gift-banner__topbar-text {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.gift-banner__btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 8px 16px;
+    background-color: yellow;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.gift-banner__btn-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gift-banner__arrow {
+    width: 30px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
 }
 
 .gift-banner__main {
