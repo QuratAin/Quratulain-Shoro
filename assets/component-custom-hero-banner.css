@@ -112,7 +112,7 @@
   background: var(--gb-bottombar-bg);
   color: var(--gb-bottombar-text-color);
   text-align: center;
-  padding: 0px 67px;
+  padding: 1px 67px;
 }
 
 .gift-banner__bottombar p {
