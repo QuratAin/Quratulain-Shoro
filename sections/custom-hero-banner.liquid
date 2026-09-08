@@ -1,10 +1,11 @@
-{{  'component-custom-hero-banner.css' | asset_url | stylesheet_tag }}
+{{ 'component-custom-hero-banner.css' | asset_url | stylesheet_tag }}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap" rel="stylesheet">
 
 {%- style -%}
+  /* Theme variables and responsive sizing for the gift banner */
   #GiftBanner-{{ section.id }} {
     --gb-topbar-bg: {{ section.settings.top_bar_bg }};
     --gb-bottombar-bg: {{ section.settings.bottom_bar_bg }};
@@ -106,115 +107,148 @@
   }
 {%- endstyle -%}
 
-<div class="gift-banner" id="GiftBanner-{{ section.id }}">
-    {% comment %} top bar {% endcomment %}
-    <div class="gift-banner__topbar">
+<!-- Gift banner main wrapper: top strip, hero media, and copy block -->
+<div class="gift-banner color-{{ section.settings.color_scheme }}" id="GiftBanner-{{ section.id }}">
+  <div class="gift-banner__topbar">
+    <button
+      type="button"
+      class="gift-banner__hamburger"
+      aria-label="{{ 'general.menu' | t: default: 'Menu' }}"
+      aria-controls="GiftBannerMobileMenu-{{ section.id }}"
+      aria-expanded="false"
+    >
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 6H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1 1H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1 11H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
 
-        {% comment %} hamburger icon - mobile {% endcomment %}
-        <button class="gift-banner__hamburger" aria-label="Menu">
-            <svg viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 6H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M1 1H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M1 11H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <a href="{{ routes.root_url }}" class="gift-banner__logo" aria-label="{{ section.settings.logo_text | default: shop.name }}">
+      {%- if section.settings.logo_image -%}
+        <img
+          src="{{ section.settings.logo_image | image_url: width: 400 }}"
+          width="{{ section.settings.logo_image.width }}"
+          height="{{ section.settings.logo_image.height }}"
+          alt="{{ section.settings.logo_image.alt | default: section.settings.logo_text }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <svg viewBox="0 0 404 51" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M363.402 0.000305176L395.565 32.1628V1.93269L396.532 0.964852H402.883L403.85 1.93269V50.6604H402.33L370.72 19.0509V49.6958L369.752 50.6604H363.402L362.438 49.6958V0.964852L363.402 0.000305176Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M213.391 0.000152588L225.953 30.3027L238.515 0.000152588H247.486L226.918 49.699L225.953 50.6668L224.985 49.699L204.417 0.000152588H213.391Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M287.641 0.000305176C292.474 0.000305176 297.056 2.52524 299.581 6.21225L294.752 11.0449H293.231C292.23 8.90508 290.028 7.59487 287.641 7.59487C284.8 7.59487 282.137 9.93217 281.979 12.9081C281.864 15.1466 282.891 16.5457 284.745 17.7407C286.739 19.0279 287.556 19.5645 290.265 21.0524C293.218 22.6754 300.688 25.8587 300.688 34.2368C300.688 42.4963 293.784 50.1798 284.88 50.1798C283.737 50.1798 281.667 50.0514 280.119 49.6958C275.757 48.6391 273.111 46.9898 270.25 43.6222L276.462 37.272L278.602 39.0661C279.566 39.8232 281.686 41.3474 283.704 41.6206C287.806 42.177 290.558 39.4644 291.091 36.788C291.516 34.6746 290.98 31.5209 287.572 29.8881C287.572 29.8881 281.43 26.4743 278.737 24.9172C275.994 23.3305 273.078 18.9982 273.078 13.8068C273.078 9.94205 274.849 6.19908 277.703 3.59184C279.909 1.57057 282.934 0.000305176 287.641 0.000305176Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M262.075 0.000305176V48.7313L261.107 49.6958H253.792V0.968144L254.757 0.000305176H262.075Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M331.317 0.000305176C337.907 0.000305176 344.227 2.61819 348.887 7.27805C353.546 11.9379 356.164 18.258 356.164 24.8481C356.164 31.4381 353.546 37.7582 348.887 42.4181C344.227 47.078 337.907 49.6958 331.317 49.6958C324.726 49.6958 318.406 47.078 313.746 42.4181C309.087 37.7582 306.469 31.4381 306.469 24.8481C306.469 18.258 309.087 11.9379 313.746 7.27805C318.406 2.61819 324.726 0.000305176 331.317 0.000305176ZM331.313 8.28619C329.138 8.2864 326.983 8.71513 324.973 9.54789C322.964 10.3807 321.137 11.6011 319.599 13.1397C316.493 16.2469 314.748 20.4609 314.748 24.8547C314.748 29.2485 316.494 33.4621 319.602 36.5687C322.709 39.6753 326.923 41.4203 331.317 41.4198C335.71 41.4198 339.924 39.6744 343.031 36.5675C346.138 33.4606 347.883 29.2468 347.883 24.853C347.883 20.4592 346.138 16.2454 343.031 13.1385C339.924 10.0316 335.71 8.28619 331.317 8.28619H331.313Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M66.7665 0.000152588C71.5991 0.000152588 76.1815 2.52509 78.7064 6.2121L73.8771 11.0447H72.3562C71.3555 8.90492 69.1531 7.59472 66.7665 7.59472C63.9255 7.59472 61.2623 9.93202 61.1043 12.908C60.9891 15.1465 62.0162 16.5456 63.8695 17.7406C65.8645 19.0277 66.6809 19.5643 69.3902 21.0523C72.3431 22.6752 79.8125 25.8586 79.8125 34.2366C79.8125 42.4962 72.9093 50.1796 64.0045 50.1796C62.8622 50.1796 60.7915 50.0512 59.2443 49.6957C54.8825 48.639 52.2357 46.9897 49.375 43.622L55.5869 37.2718L57.7267 39.0659C58.6913 39.8231 60.8113 41.3473 62.8293 41.6205C66.9311 42.1768 69.6831 39.4643 70.2164 36.7879C70.6411 34.6744 70.1045 31.5207 66.6973 29.8879C66.6973 29.8879 60.5545 26.4742 57.8617 24.9171C55.1195 23.3303 52.2028 18.9981 52.2028 13.8067C52.2028 9.94189 53.9739 6.19893 56.828 3.59169C59.0336 1.57042 62.059 0.000152588 66.7665 0.000152588Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M102.985 0.000152588C107.818 0.000152588 112.4 2.52509 114.925 6.2121L110.096 11.0447H108.575C107.574 8.90492 105.372 7.59472 102.985 7.59472C100.144 7.59472 97.4811 9.93202 97.323 12.908C97.2078 15.1465 98.2349 16.5456 100.088 17.7406C102.083 19.0277 102.9 19.5643 105.609 21.0523C108.562 22.6752 116.031 25.8586 116.031 34.2366C116.031 42.4962 109.128 50.1796 100.223 50.1796C99.0809 50.1796 97.0103 50.0512 95.4631 49.6957C91.1012 48.639 88.4545 46.9897 85.5938 43.622L91.8057 37.2718L93.9455 39.0659C94.91 39.8231 97.0301 41.3473 99.048 41.6205C103.15 42.1768 105.902 39.4643 106.435 36.7879C106.86 34.6744 106.323 31.5207 102.916 29.8879C102.916 29.8879 96.7733 26.4742 94.0805 24.9171C91.3382 23.3303 88.4216 18.9981 88.4216 13.8067C88.4216 9.94189 90.1926 6.19893 93.0468 3.59169C95.2524 1.57042 98.2777 0.000152588 102.985 0.000152588Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M41.1996 0.000152588V48.7311L40.2317 49.6957H32.917V0.967991L33.8815 0.000152588H41.1996Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M146.65 0.000152588C153.24 0.000152588 159.56 2.61803 164.22 7.2779C168.879 11.9378 171.497 18.2579 171.497 24.8479C171.497 31.438 168.879 37.7581 164.22 42.4179C159.56 47.0778 153.24 49.6957 146.65 49.6957C140.059 49.6957 133.739 47.0778 129.079 42.4179C124.42 37.7581 121.802 31.438 121.802 24.8479C121.802 18.2579 124.42 11.9378 129.079 7.2779C133.739 2.61803 140.059 0.000152588 146.65 0.000152588ZM146.646 8.28603C144.471 8.28625 142.316 8.71498 140.307 9.54774C138.297 10.3805 136.47 11.601 134.932 13.1395C131.826 16.2467 130.081 20.4607 130.081 24.8545C130.081 29.2483 131.827 33.462 134.935 36.5685C138.042 39.6751 142.256 41.4201 146.65 41.4197C151.043 41.4197 155.257 39.6743 158.364 36.5674C161.471 33.4605 163.216 29.2467 163.216 24.8529C163.216 20.4591 161.471 16.2452 158.364 13.1383C155.257 10.0315 151.043 8.28603 146.65 8.28603H146.646Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M24.8478 0V7.31804L23.8799 8.28259H16.5652V49.6955H8.28259V8.28259H0V0.967838L0.967834 0H24.8478Z" fill="currentColor"/>
+        </svg>
+      {%- endif -%}
+    </a>
+
+    {%- if section.settings.top_bar_text != blank -%}
+      <p class="gift-banner__topbar-text">{{ section.settings.top_bar_text }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.choose_gift_label != blank -%}
+      <a
+        {% if section.settings.choose_gift_link != blank %}
+          href="{{ section.settings.choose_gift_link }}"
+        {% else %}
+          href="#" role="link" aria-disabled="true"
+        {% endif %}
+        class="gift-banner__btn gift-banner__btn--choose"
+      >
+        <span class="gift-banner__btn-fill" aria-hidden="true"></span>
+        <span class="gift-banner__btn-label">
+          {{ section.settings.choose_gift_label }}
+          <svg viewBox="0 0 68 30" fill="none" aria-hidden="true" class="gift-banner__arrow">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.7279L1.96701e-07 12.7279L-1.96701e-07 16.7279L2 16.7279L2 12.7279ZM67.4142 16.1421C68.1953 15.3611 68.1953 14.0947 67.4142 13.3137L54.6863 0.585774C53.9052 -0.195275 52.6389 -0.195275 51.8579 0.585774C51.0768 1.36682 51.0768 2.63315 51.8579 3.4142L63.1716 14.7279L51.8579 26.0416C51.0768 26.8227 51.0768 28.089 51.8579 28.87C52.6389 29.6511 53.9052 29.6511 54.6863 28.87L67.4142 16.1421ZM2 16.7279L66 16.7279L66 12.7279L2 12.7279L2 16.7279Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="gift-banner__main">
+    {%- if section.settings.background_image -%}
+      {%- liquid
+        assign mobile_image = section.settings.mobile_background_image | default: section.settings.background_image
+      -%}
+      <picture>
+        <source
+          media="(max-width: 749px)"
+          srcset="
+            {{ mobile_image | image_url: width: 400 }} 400w,
+            {{ mobile_image | image_url: width: 750 }} 750w,
+            {{ mobile_image | image_url: width: 1100 }} 1100w
+          "
+          sizes="100vw"
+        >
+        <img
+          srcset="
+            {%- if section.settings.background_image.width >= 375 -%}{{ section.settings.background_image | image_url: width: 375 }} 375w,{%- endif -%}
+            {%- if section.settings.background_image.width >= 750 -%}{{ section.settings.background_image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if section.settings.background_image.width >= 1100 -%}{{ section.settings.background_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+            {%- if section.settings.background_image.width >= 1500 -%}{{ section.settings.background_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {%- if section.settings.background_image.width >= 1780 -%}{{ section.settings.background_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+            {{ section.settings.background_image | image_url: width: 2200 }} 2200w
+          "
+          src="{{ section.settings.background_image | image_url: width: 1780 }}"
+          sizes="100vw"
+          alt=""
+          loading="lazy"
+          width="{{ section.settings.background_image.width }}"
+          height="{{ section.settings.background_image.height }}"
+          class="gift-banner__image"
+        >
+      </picture>
+    {%- endif -%}
+
+    <div class="gift-banner__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="gift-banner__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.mobile_description != blank -%}
+        <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.mobile_description }}</div>
+      {%- elsif section.settings.description != blank -%}
+        <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.description }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="gift-banner__description gift-banner__description--desktop">{{ section.settings.description }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.shop_now_label != blank -%}
+        <a
+          {% if section.settings.shop_now_link != blank %}
+            href="{{ section.settings.shop_now_link }}"
+          {% else %}
+            href="#" role="link" aria-disabled="true"
+          {% endif %}
+          class="gift-banner__btn gift-banner__btn--shop"
+        >
+          <span class="gift-banner__btn-fill" aria-hidden="true"></span>
+          <span class="gift-banner__btn-label">
+            {{ section.settings.shop_now_label }}
+            <svg viewBox="0 0 68 30" fill="none" aria-hidden="true" class="gift-banner__arrow">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.7279L1.96701e-07 12.7279L-1.96701e-07 16.7279L2 16.7279L2 12.7279ZM67.4142 16.1421C68.1953 15.3611 68.1953 14.0947 67.4142 13.3137L54.6863 0.585774C53.9052 -0.195275 52.6389 -0.195275 51.8579 0.585774C51.0768 1.36682 51.0768 2.63315 51.8579 3.4142L63.1716 14.7279L51.8579 26.0416C51.0768 26.8227 51.0768 28.089 51.8579 28.87C52.6389 29.6511 53.9052 29.6511 54.6863 28.87L67.4142 16.1421ZM2 16.7279L66 16.7279L66 12.7279L2 12.7279L2 16.7279Z" fill="currentColor"/>
             </svg>
-        </button>
-        
-        {% comment %} logo {% endcomment %}
-        <a href="{{ shop.url }}" class="gift-banner__logo" aria-label="tisso vision">
-            {% if section.settings.logo_image %}
-                <img 
-                    src="{{ section.settings.logo_image | image_url: width: 400 }}" 
-                    alt="{{ shop.name }}"
-                    class="gift-banner__logo-image"
-                    width="152"
-                    height="19"
-                    loading="eager"
-                >
-            {% else %}
-                <svg width="152" height="19" viewBox="0 0 152 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M136.276 0L148.337 12.0609V0.724644L148.7 0.361705H151.081L151.444 0.724644V18.9975H150.874L139.02 7.14398V18.6358L138.657 18.9975H136.276L135.914 18.6358V0.361705L136.276 0Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M80.0215 0L84.7323 11.3635L89.4431 0H92.8071L85.094 18.6371L84.7323 19L84.3693 18.6371L76.6562 0H80.0215Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M107.866 0C109.678 0 111.396 0.946852 112.343 2.32948L110.532 4.14171H109.962C109.586 3.33929 108.761 2.84796 107.866 2.84796C106.8 2.84796 105.801 3.72445 105.742 4.84043C105.699 5.67988 106.084 6.20454 106.779 6.65265C107.527 7.13534 107.833 7.33656 108.849 7.89455C109.957 8.50315 112.758 9.6969 112.758 12.8387C112.758 15.936 110.169 18.8173 106.83 18.8173C106.401 18.8173 105.625 18.7692 105.045 18.6358C103.409 18.2396 102.417 17.6211 101.344 16.3582L103.673 13.9769L104.476 14.6497C104.837 14.9336 105.632 15.5052 106.389 15.6076C107.927 15.8163 108.959 14.799 109.159 13.7954C109.319 13.0029 109.117 11.8202 107.84 11.2079C107.84 11.2079 105.536 9.92775 104.526 9.34384C103.498 8.74881 102.404 7.12423 102.404 5.17744C102.404 3.72815 103.068 2.32454 104.139 1.34683C104.966 0.588851 106.1 0 107.866 0Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M98.2778 0V18.2741L97.9149 18.6358H95.1719V0.362939L95.5336 0H98.2778Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M124.244 0C126.715 0 129.085 0.981706 130.832 2.72915C132.58 4.4766 133.562 6.84665 133.562 9.31791C133.562 11.7892 132.58 14.1592 130.832 15.9067C129.085 17.6541 126.715 18.6358 124.244 18.6358C121.772 18.6358 119.402 17.6541 117.655 15.9067C115.907 14.1592 114.926 11.7892 114.926 9.31791C114.926 6.84665 115.907 4.4766 117.655 2.72915C119.402 0.981706 121.772 0 124.244 0ZM124.242 3.10721C123.427 3.10729 122.619 3.26806 121.865 3.58034C121.111 3.89263 120.427 4.35031 119.85 4.92726C118.685 6.09245 118.03 7.67271 118.031 9.32038C118.031 10.9681 118.685 12.5482 119.851 13.7131C121.016 14.8781 122.596 15.5325 124.244 15.5323C125.891 15.5323 127.472 14.8778 128.637 13.7127C129.802 12.5476 130.456 10.9674 130.456 9.31976C130.456 7.67209 129.802 6.0919 128.637 4.92682C127.472 3.76174 125.891 3.10721 124.244 3.10721H124.242Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0374 0C26.8497 0 28.5681 0.946852 29.5149 2.32948L27.7039 4.14171H27.1336C26.7583 3.33929 25.9324 2.84796 25.0374 2.84796C23.9721 2.84796 22.9734 3.72445 22.9141 4.84043C22.8709 5.67988 23.2561 6.20454 23.9511 6.65265C24.6992 7.13534 25.0053 7.33656 26.0213 7.89455C27.1286 8.50315 29.9297 9.6969 29.9297 12.8387C29.9297 15.936 27.341 18.8173 24.0017 18.8173C23.5733 18.8173 22.7968 18.7692 22.2166 18.6358C20.5809 18.2396 19.5884 17.6211 18.5156 16.3582L20.8451 13.9769L21.6475 14.6497C22.0092 14.9336 22.8042 15.5052 23.561 15.6076C25.0991 15.8163 26.1312 14.799 26.3312 13.7954C26.4904 13.0029 26.2892 11.8202 25.0115 11.2079C25.0115 11.2079 22.7079 9.92775 21.6981 9.34384C20.6698 8.74881 19.5761 7.12423 19.5761 5.17744C19.5761 3.72815 20.2402 2.32454 21.3105 1.34683C22.1376 0.588851 23.2721 0 25.0374 0Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M38.6195 0C40.4317 0 42.1501 0.946852 43.0969 2.32948L41.2859 4.14171H40.7156C40.3403 3.33929 39.5145 2.84796 38.6195 2.84796C37.5541 2.84796 36.5554 3.72445 36.4961 4.84043C36.4529 5.67988 36.8381 6.20454 37.5331 6.65265C38.2812 7.13534 38.5874 7.33656 39.6033 7.89455C40.7107 8.50315 43.5117 9.6969 43.5117 12.8387C43.5117 15.936 40.923 18.8173 37.5837 18.8173C37.1554 18.8173 36.3789 18.7692 35.7987 18.6358C34.163 18.2396 33.1704 17.6211 32.0977 16.3582L34.4271 13.9769L35.2296 14.6497C35.5913 14.9336 36.3863 15.5052 37.143 15.6076C38.6812 15.8163 39.7132 14.799 39.9132 13.7954C40.0724 13.0029 39.8712 11.8202 38.5935 11.2079C38.5935 11.2079 36.29 9.92775 35.2802 9.34384C34.2518 8.74881 33.1581 7.12423 33.1581 5.17744C33.1581 3.72815 33.8222 2.32454 34.8925 1.34683C35.7196 0.588851 36.8541 0 38.6195 0Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.4497 0V18.2741L15.0868 18.6358H12.3438V0.362939L12.7055 0H15.4497Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M54.9937 0C57.465 0 59.835 0.981706 61.5825 2.72915C63.3299 4.4766 64.3116 6.84665 64.3116 9.31791C64.3116 11.7892 63.3299 14.1592 61.5825 15.9067C59.835 17.6541 57.465 18.6358 54.9937 18.6358C52.5224 18.6358 50.1524 17.6541 48.4049 15.9067C46.6575 14.1592 45.6758 11.7892 45.6758 9.31791C45.6758 6.84665 46.6575 4.4766 48.4049 2.72915C50.1524 0.981706 52.5224 0 54.9937 0ZM54.9925 3.10721C54.1766 3.10729 53.3688 3.26806 52.6151 3.58034C51.8614 3.89263 51.1765 4.35031 50.5997 4.92726C49.4347 6.09245 48.7804 7.67271 48.7805 9.32038C48.7807 10.9681 49.4354 12.5482 50.6006 13.7131C51.7658 14.8781 53.346 15.5325 54.9937 15.5323C56.6414 15.5323 58.2216 14.8778 59.3866 13.7127C60.5517 12.5476 61.2063 10.9674 61.2063 9.31976C61.2063 7.67209 60.5517 6.0919 59.3866 4.92682C58.2216 3.76174 56.6414 3.10721 54.9937 3.10721H54.9925Z" fill="black"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.31791 0V2.74427L8.95497 3.10597H6.21194V18.6358H3.10597V3.10597H0V0.362939L0.362938 0H9.31791Z" fill="black"/>
-                </svg>
-            {% endif %}
+          </span>
         </a>
-
-        {% if section.settings.top_bar_text %}
-            <p class="gift-banner__topbar-text">{{ section.settings.top_bar_text }}</p>
-        {% endif %}
-
-        {% if section.settings.choose_gift_label %}
-            <a 
-                {% if section.settings.choose_gift_link %}
-                    href="{{ section.settings.choose_gift_link }}"
-                {% else %}
-                    href="{{ shop.url }}/collections/all"
-                {% endif %}
-                class="gift-banner__btn gift-banner__btn--choose" 
-                aria-label="Choose Gift"
-            >
-                <span class="gift-banner__btn--fill" aria-hidden="true"></span>
-                <span class="gift-banner__btn-label">
-                    {{ section.settings.choose_gift_label }}
-                    <svg class="gift-banner__arrow" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.75 4.77298L7.37629e-08 4.77298L-7.37629e-08 6.27298L0.75 6.27298L0.75 4.77298ZM25.2803 6.05331C25.5732 5.76042 25.5732 5.28554 25.2803 4.99265L20.5074 0.21968C20.2145 -0.073213 19.7396 -0.0732131 19.4467 0.21968C19.1538 0.512574 19.1538 0.987447 19.4467 1.28034L23.6893 5.52298L19.4467 9.76562C19.1538 10.0585 19.1538 10.5334 19.4467 10.8263C19.7396 11.1192 20.2145 11.1192 20.5074 10.8263L25.2803 6.05331ZM0.75 6.27298L24.75 6.27298L24.75 4.77298L0.75 4.77298L0.75 6.27298Z" fill="black"/>
-                    </svg>
-                </span>
-            </a>
-        {% endif %}
+      {%- endif -%}
     </div>
+  </div>
 
-    {% comment %} main {% endcomment %}
-    <div class="gift-banner__main">
-        {% comment %} background image {% endcomment %}
-        <img src="{{ section.settings.background_image | asset_url }}" alt="Hero Banner Background" class="gift-banner__background-image">
-
-        {% comment %} main content {% endcomment %}
-        <div class="gift-banner__content">
-            {% if section.settings.heading %}
-                <h2 class="gift-banner__heading">{{ section.settings.heading }}</h2>
-            {% endif %}
-
-            {% if section.settings.mobile_description %}
-                <div class="gift-banner__description gift-banner__description--mobile">
-                    {{ section.settings.mobile_description }}
-                </div>
-            {% elsif section.settings.description %}
-                <div class="gift-banner__description gift-banner__description--mobile">
-                    {{ section.settings.description }}
-                </div>
-            {% endif %}
-
-            {% if section.settings.description %}
-                <div class="gift-banner__description gift-banner__description--desktop">
-                    {{ section.settings.description }}
-                </div>
-            {% endif %}
-
-            {% if section.settings.shop_now_label %}
-
-            <a href="{{ section.settings.shop_now_link }}" class="gift-banner__btn gift-banner__btn--shop" aria-label="{{ section.settings.shop_now_label }}">
-                <span class="gift-banner__btn--fill" aria-hidden="true"></span>
-                <span class="gift-banner__btn-label">{{ section.settings.shop_now_label }}
-                    <svg class="gift-banner__arrow" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.75 4.77298L7.37629e-08 4.77298L-7.37629e-08 6.27298L0.75 6.27298L0.75 4.77298ZM25.2803 6.05331C25.5732 5.76042 25.5732 5.28554 25.2803 4.99265L20.5074 0.21968C20.2145 -0.073213 19.7396 -0.0732131 19.4467 0.21968C19.1538 0.512574 19.1538 0.987447 19.4467 1.28034L23.6893 5.52298L19.4467 9.76562C19.1538 10.0585 19.1538 10.5334 19.4467 10.8263C19.7396 11.1192 20.2145 11.1192 20.5074 10.8263L25.2803 6.05331ZM0.75 6.27298L24.75 6.27298L24.75 4.77298L0.75 4.77298L0.75 6.27298Z" fill="black"/>
-                    </svg>
-                </span>
-            </a>
-        </div>
-    </div>
-
-    {% comment %} bottom bar {% endcomment %}
+  {%- if section.settings.bottom_bar_text != blank -%}
     <div class="gift-banner__bottombar">
-        <p class="gift-banner__bottombar-text">{{ section.settings.bottom_bar_text }}</p>
+      <p>{{ section.settings.bottom_bar_text }}</p>
     </div>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -283,7 +317,13 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background illustration"
+      "label": "Background illustration (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "Background illustration (mobile)",
+      "info": "Leave empty to reuse the desktop image"
     },
     {
       "type": "text",
@@ -314,8 +354,15 @@
     {
       "type": "richtext",
       "id": "description",
-      "label": "Description",
+      "label": "Description (desktop)",
       "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "mobile_description",
+      "label": "Description (mobile)",
+      "info": "Leave empty to reuse the desktop description",
+      "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination.</p>"
     },
     {
       "type": "range",
