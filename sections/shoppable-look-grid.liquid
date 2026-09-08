@@ -1,0 +1,141 @@
+{{ 'component-shoppable-look-grid.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'component-shoppable-look-grid.js' | asset_url }}" defer="defer"></script>
+
+{% style %}
+  
+{% endstyle %}
+
+<div class="shoppable-look-grid section {{ section.settings.color_scheme }} {% if section.settings.heading != blank %}has-heading{% endif %}" data-section-id="{{ section.id }}" data-section-type="shoppable-look-grid">
+  <div class="shoppable-look-grid__inner page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="shoppable-look-grid__heading heading h2">{{ section.settings.heading }}</h2>
+    {% endif %}
+    <div class="shoppable-look-grid__grid" style="--columns-desktop: {{ section.settings.columns_desktop }}; --columns-mobile: {{ section.settings.columns_mobile }}">
+      {% for block in section.blocks %}
+        {% assign product = all_products[block.settings.product] %}
+        {% if product %}
+          <div class="shoppable-look-grid__item">
+            <a href="{{ product.url }}" class="shoppable-look-grid__link">
+              <div class="shoppable-look-grid__image-wrapper">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="shoppable-look-grid__image" />
+                {% else %}
+                  <div class="shoppable-look-grid__placeholder"></div>
+                {% endif %}
+              </div>
+              <span class="shoppable-look-grid__title">{{ product.title }}</span>
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Shoppable Look Grid",
+    "tag": "section",
+    "class": "section",
+    "max_blocks": 6,
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Tisson vision in the world"
+        },
+        {
+            "type": "header",
+            "content": "Layout"
+        },
+        {
+            "type": "range",
+            "id": "columns_desktop",
+            "label": "Columns (Desktop)",
+            "min": 2,
+            "max": 4,
+            "step": 1,
+            "default": 3
+        },
+        {
+            "type": "select",
+            "id": "columns_mobile",
+            "label": "Columns (Mobile)",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "1 column"
+                },
+                {
+                    "value": "2",
+                    "label": "2 columns"
+                }
+            ],
+            "default": "2"
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Color scheme",
+            "default": "scheme-1"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "title",
+            "name": "Product Title",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                }
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "type": "title",
+            "name": "Product Title",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Shoppable Look Grid",
+            "blocks": [
+                {
+                    "type": "title"
+                },
+                {
+                    "type": "title"
+                },
+                {
+                    "type": "title"
+                },
+                {
+                    "type": "title"
+                },
+                {
+                    "type": "title"
+                },
+                {
+                    "type": "title"
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}
