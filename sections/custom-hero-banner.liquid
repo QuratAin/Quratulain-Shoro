@@ -30,11 +30,11 @@
   }
 
   #GiftBanner-{{ section.id }} .gift-banner__topbar-text {
-    font-size: {{ section.settings.top_bar_font_size_mobile | default: section.settings.top_bar_font_size }}px;
+    font-size: {{ section.settings.top_bar_font_size_mobile }}px;
   }
 
   #GiftBanner-{{ section.id }} .gift-banner__bottombar p {
-    font-size: {{ section.settings.bottom_bar_font_size_mobile | default: section.settings.bottom_bar_font_size }}px;
+    font-size: {{ section.settings.bottom_bar_font_size_mobile }}px;
   }
 
   #GiftBanner-{{ section.id }} .gift-banner__heading {
@@ -42,21 +42,20 @@
   }
 
   #GiftBanner-{{ section.id }} .gift-banner__description {
-    font-size: {{ section.settings.description_font_size_mobile | default: section.settings.description_font_size | times: 0.65 | round }}px;
+    font-size: {{ section.settings.description_font_size_mobile }}px;
   }
 
   #GiftBanner-{{ section.id }} .gift-banner__btn--choose {
-    font-size: {{ section.settings.choose_gift_font_size_mobile | default: section.settings.choose_gift_font_size | times: 0.7 | round }}px;
-    padding: 11px 29px;
+    font-size: {{ section.settings.choose_gift_font_size_mobile }}px;
   }
 
   #GiftBanner-{{ section.id }} .gift-banner__btn--shop {
-    font-size: {{ section.settings.shop_now_font_size_mobile | default: section.settings.shop_now_font_size | times: 0.7 | round }}px;
+    font-size: {{ section.settings.shop_now_font_size_mobile }}px;
   }
 
   #GiftBanner-{{ section.id }} .gift-banner__content {
     max-width: 100%;
-    padding: {{ section.settings.content_padding_top }}px 24px {{ section.settings.content_padding_bottom }}px;
+    padding: {{ section.settings.content_padding_top }}px {{ section.settings.content_padding_bottom }}px;
   }
 
   @media screen and (min-width: 750px) {
@@ -74,12 +73,11 @@
 
     #GiftBanner-{{ section.id }} .gift-banner__description {
       font-size: {{ section.settings.description_font_size }}px;
-      max-width: {{ section.settings.content_max_width | times: 0.75 | round }}px;
+      max-width: {{ section.settings.content_max_width }}px;
     }
 
     #GiftBanner-{{ section.id }} .gift-banner__btn--choose {
       font-size: {{ section.settings.choose_gift_font_size }}px;
-      padding: 16px 42px;
     }
 
     #GiftBanner-{{ section.id }} .gift-banner__btn--shop {
