@@ -186,68 +186,96 @@
       {%- liquid
         assign mobile_image = section.settings.mobile_background_image | default: section.settings.background_image
       -%}
-      <picture>
-        <source
-          media="(max-width: 749px)"
-          srcset="
-            {{ mobile_image | image_url: width: 400 }} 400w,
-            {{ mobile_image | image_url: width: 750 }} 750w,
-            {{ mobile_image | image_url: width: 1100 }} 1100w
-          "
-          sizes="100vw"
-        >
-        <img
-          srcset="
-            {%- if section.settings.background_image.width >= 375 -%}{{ section.settings.background_image | image_url: width: 375 }} 375w,{%- endif -%}
-            {%- if section.settings.background_image.width >= 750 -%}{{ section.settings.background_image | image_url: width: 750 }} 750w,{%- endif -%}
-            {%- if section.settings.background_image.width >= 1100 -%}{{ section.settings.background_image | image_url: width: 1100 }} 1100w,{%- endif -%}
-            {%- if section.settings.background_image.width >= 1500 -%}{{ section.settings.background_image | image_url: width: 1500 }} 1500w,{%- endif -%}
-            {%- if section.settings.background_image.width >= 1780 -%}{{ section.settings.background_image | image_url: width: 1780 }} 1780w,{%- endif -%}
-            {{ section.settings.background_image | image_url: width: 2200 }} 2200w
-          "
-          src="{{ section.settings.background_image | image_url: width: 1780 }}"
-          sizes="100vw"
-          alt=""
-          loading="lazy"
-          width="{{ section.settings.background_image.width }}"
-          height="{{ section.settings.background_image.height }}"
-          class="gift-banner__image"
-        >
-      </picture>
+      <div class="gift-banner__hero-row">
+        <picture>
+          <source
+            media="(max-width: 749px)"
+            srcset="
+              {{ mobile_image | image_url: width: 400 }} 400w,
+              {{ mobile_image | image_url: width: 750 }} 750w,
+              {{ mobile_image | image_url: width: 1100 }} 1100w
+            "
+            sizes="100vw"
+          >
+          <img
+            srcset="
+              {%- if section.settings.background_image.width >= 375 -%}{{ section.settings.background_image | image_url: width: 375 }} 375w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 750 -%}{{ section.settings.background_image | image_url: width: 750 }} 750w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 1100 -%}{{ section.settings.background_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 1500 -%}{{ section.settings.background_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+              {%- if section.settings.background_image.width >= 1780 -%}{{ section.settings.background_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+              {{ section.settings.background_image | image_url: width: 2200 }} 2200w
+            "
+            src="{{ section.settings.background_image | image_url: width: 1780 }}"
+            sizes="100vw"
+            alt=""
+            loading="lazy"
+            width="{{ section.settings.background_image.width }}"
+            height="{{ section.settings.background_image.height }}"
+            class="gift-banner__image"
+          >
+        </picture>
+      </div>
     {%- endif -%}
 
-    <div class="gift-banner__content">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="gift-banner__heading">{{ section.settings.heading }}</h2>
-      {%- endif -%}
+    <div class="gift-banner__content-row">
+      <div class="gift-banner__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="gift-banner__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
 
-      {%- if section.settings.mobile_description != blank -%}
-        <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.mobile_description }}</div>
-      {%- elsif section.settings.description != blank -%}
-        <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.description }}</div>
-      {%- endif -%}
+        {%- if section.settings.mobile_description != blank -%}
+          <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.mobile_description }}</div>
+        {%- elsif section.settings.description != blank -%}
+          <div class="gift-banner__description gift-banner__description--mobile">{{ section.settings.description }}</div>
+        {%- endif -%}
 
-      {%- if section.settings.description != blank -%}
-        <div class="gift-banner__description gift-banner__description--desktop">{{ section.settings.description }}</div>
-      {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="gift-banner__description gift-banner__description--desktop">{{ section.settings.description }}</div>
+        {%- endif -%}
 
-      {%- if section.settings.shop_now_label != blank -%}
-        <a
-          {% if section.settings.shop_now_link != blank %}
-            href="{{ section.settings.shop_now_link }}"
-          {% else %}
-            href="#" role="link" aria-disabled="true"
-          {% endif %}
-          class="gift-banner__btn gift-banner__btn--shop"
-        >
-          <span class="gift-banner__btn-fill" aria-hidden="true"></span>
-          <span class="gift-banner__btn-label">
-            {{ section.settings.shop_now_label }}
-            <svg viewBox="0 0 68 30" fill="none" aria-hidden="true" class="gift-banner__arrow">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.7279L1.96701e-07 12.7279L-1.96701e-07 16.7279L2 16.7279L2 12.7279ZM67.4142 16.1421C68.1953 15.3611 68.1953 14.0947 67.4142 13.3137L54.6863 0.585774C53.9052 -0.195275 52.6389 -0.195275 51.8579 0.585774C51.0768 1.36682 51.0768 2.63315 51.8579 3.4142L63.1716 14.7279L51.8579 26.0416C51.0768 26.8227 51.0768 28.089 51.8579 28.87C52.6389 29.6511 53.9052 29.6511 54.6863 28.87L67.4142 16.1421ZM2 16.7279L66 16.7279L66 12.7279L2 12.7279L2 16.7279Z" fill="currentColor"/>
-            </svg>
-          </span>
-        </a>
+        {%- if section.settings.shop_now_label != blank -%}
+          <a
+            {% if section.settings.shop_now_link != blank %}
+              href="{{ section.settings.shop_now_link }}"
+            {% else %}
+              href="#" role="link" aria-disabled="true"
+            {% endif %}
+            class="gift-banner__btn gift-banner__btn--shop"
+          >
+            <span class="gift-banner__btn-fill" aria-hidden="true"></span>
+            <span class="gift-banner__btn-label">
+              {{ section.settings.shop_now_label }}
+              <svg viewBox="0 0 68 30" fill="none" aria-hidden="true" class="gift-banner__arrow">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.7279L1.96701e-07 12.7279L-1.96701e-07 16.7279L2 16.7279L2 12.7279ZM67.4142 16.1421C68.1953 15.3611 68.1953 14.0947 67.4142 13.3137L54.6863 0.585774C53.9052 -0.195275 52.6389 -0.195275 51.8579 0.585774C51.0768 1.36682 51.0768 2.63315 51.8579 3.4142L63.1716 14.7279L51.8579 26.0416C51.0768 26.8227 51.0768 28.089 51.8579 28.87C52.6389 29.6511 53.9052 29.6511 54.6863 28.87L67.4142 16.1421ZM2 16.7279L66 16.7279L66 12.7279L2 12.7279L2 16.7279Z" fill="currentColor"/>
+              </svg>
+            </span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.background_image -%}
+        <div class="gift-banner__feature-image">
+          <picture>
+            <img
+              src="{{ section.settings.background_image | image_url: width: 1780 }}"
+              srcset="
+                {%- if section.settings.background_image.width >= 375 -%}{{ section.settings.background_image | image_url: width: 375 }} 375w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 750 -%}{{ section.settings.background_image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 1100 -%}{{ section.settings.background_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 1500 -%}{{ section.settings.background_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if section.settings.background_image.width >= 1780 -%}{{ section.settings.background_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+                {{ section.settings.background_image | image_url: width: 2200 }} 2200w
+              "
+              sizes="100vw"
+              alt=""
+              loading="lazy"
+              width="{{ section.settings.background_image.width }}"
+              height="{{ section.settings.background_image.height }}"
+              class="gift-banner__image"
+            >
+          </picture>
+        </div>
       {%- endif -%}
     </div>
   </div>
