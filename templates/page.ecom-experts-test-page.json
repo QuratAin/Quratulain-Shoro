@@ -21,8 +21,17 @@
       "type": "custom-hero-banner",
       "name": "Hero Banner",
       "settings": {
+        "logo_text": "Tisso Vision",
+        "top_bar_text": "Find the ideal gift for your loved ones",
+        "choose_gift_label": "Choose Gift",
+        "choose_gift_link": "shopify://collections/all",
+        "background_image": "shopify://shop_images/Frame.png",
         "heading": "Custom Hero Banner",
-        "subheading": "This is a custom hero banner section."
+        "description": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>",
+        "mobile_description": "<p>Discover Joy: Your Ultimate Holiday Gift Destination.</p>",
+        "shop_now_label": "Shop Now",
+        "shop_now_link": "shopify://collections/all",
+        "bottom_bar_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
       }
     }
   },
