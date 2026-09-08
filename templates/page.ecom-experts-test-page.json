@@ -75,47 +75,47 @@
         "title_QUQanE": {
           "type": "title",
           "settings": {
-            "product": ""
-          }
-        },
-        "title_DWm8Ah": {
-          "type": "title",
-          "settings": {
-            "product": ""
+            "product": "black-leather-bag"
           }
         },
         "title_YNwbtr": {
           "type": "title",
           "settings": {
-            "product": ""
+            "product": "blue-silk-tuxedo"
           }
         },
         "title_QBJAAr": {
           "type": "title",
           "settings": {
-            "product": ""
+            "product": "chequered-red-shirt"
           }
         },
         "title_TRyR7f": {
           "type": "title",
           "settings": {
-            "product": ""
+            "product": "classic-leather-jacket"
           }
         },
         "title_WJtnp3": {
           "type": "title",
           "settings": {
-            "product": ""
+            "product": "classic-varsity-top"
+          }
+        },
+        "title_DWm8Ah": {
+          "type": "title",
+          "settings": {
+            "product": "dark-denim-top"
           }
         }
       },
       "block_order": [
         "title_QUQanE",
-        "title_DWm8Ah",
         "title_YNwbtr",
         "title_QBJAAr",
         "title_TRyR7f",
-        "title_WJtnp3"
+        "title_WJtnp3",
+        "title_DWm8Ah"
       ],
       "name": "Shoppable Look Grid",
       "settings": {
