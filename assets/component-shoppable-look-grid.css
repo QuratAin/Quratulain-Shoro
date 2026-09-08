@@ -1,0 +1,27 @@
+.shoppable-grid-section > *{
+  font-family: 'Jost', sans-serif;
+}
+
+.shoppable-grid-section__heading {
+  margin: 0 0 32px;
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(var(--color-foreground, 17 17 17));
+}
+
+.shoppable-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--slg-columns-mobile, 2), 1fr);
+  gap: 16px;
+}
+
+@media screen and (min-width: 750px) {
+  .shoppable-grid {
+    grid-template-columns: repeat(var(--slg-columns-desktop, 3), 1fr);
+    gap: 24px;
+  }
+
+  .shoppable-grid-section__heading {
+    font-size: 40px;
+  }
+}
