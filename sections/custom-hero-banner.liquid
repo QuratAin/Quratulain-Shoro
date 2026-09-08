@@ -4,8 +4,88 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-{% style %}
-{% endstyle %}
+{%- style -%}
+    /* banner styles controlled via theme editor */
+    #GiftBanner-{{ section.id }} {
+        --gb-topbar-bg: {{ section.settings.top_bar_bg }};
+        --gb-bottombar-bg: {{ section.settings.bottom_bar_bg }};
+        --gb-bg: {{ section.settings.background_color }};
+        --gb-heading-color: {{ section.settings.heading_color }};
+        --gb-text-color: {{ section.settings.description_color }};
+        --gb-topbar-text-color: {{ section.settings.top_bar_text_color }};
+        --gb-bottombar-text-color: {{ section.settings.bottom_bar_text_color }};
+
+        --gb-choose-bg: {{ section.settings.choose_gift_bg }};
+        --gb-choose-text: {{ section.settings.choose_gift_text }};
+        --gb-choose-hover-bg: {{ section.settings.choose_gift_hover_bg }};
+        --gb-choose-hover-text: {{ section.settings.choose_gift_hover_text }};
+
+        --gb-shop-bg: {{ section.settings.shop_now_bg }};
+        --gb-shop-text: {{ section.settings.shop_now_text }};
+        --gb-shop-hover-bg: {{ section.settings.shop_now_hover_bg }};
+        --gb-shop-hover-text: {{ section.settings.shop_now_hover_text }};
+
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__topbar-text {
+        font-size: {{ section.settings.top_bar_font_size }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__bottombar p {
+        font-size: {{ section.settings.bottom_bar_font_size }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__heading {
+        font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__description {
+        font-size: {{ section.settings.description_font_size | times: 0.65 | round }}px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__btn--choose {
+        font-size: {{ section.settings.choose_gift_font_size | times: 0.7 | round }}px;
+        padding: 11px 29px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__btn--shop {
+        font-size: {{ section.settings.shop_now_font_size | times: 0.7 | round }}px;
+        padding: 12px 34px;
+    }
+
+    #GiftBanner-{{ section.id }} .gift-banner__content {
+        max-width: 100%;
+        padding: {{ section.settings.content_padding_top }}px 24px {{ section.settings.content_padding_bottom }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+        #GiftBanner-{{ section.id }} .gift-banner__heading {
+        font-size: {{ section.settings.heading_size_desktop }}px;
+        }
+
+        #GiftBanner-{{ section.id }} .gift-banner__description {
+        font-size: {{ section.settings.description_font_size }}px;
+        max-width: {{ section.settings.content_max_width | times: 0.75 | round }}px;
+        }
+
+        #GiftBanner-{{ section.id }} .gift-banner__btn--choose {
+        font-size: {{ section.settings.choose_gift_font_size }}px;
+        padding: 16px 42px;
+        }
+
+        #GiftBanner-{{ section.id }} .gift-banner__btn--shop {
+        font-size: {{ section.settings.shop_now_font_size }}px;
+        padding: 17px 48px;
+        }
+
+        #GiftBanner-{{ section.id }} .gift-banner__content {
+        max-width: {{ section.settings.content_max_width }}px;
+        padding: {{ section.settings.content_padding_top }}px {{ section.settings.content_padding_left }}px {{ section.settings.content_padding_bottom }}px;
+        }
+    }
+{%- endstyle -%}
 
 <div class="gift-banner" id="GiftBanner-{{ section.id }}">
     {% comment %} top bar {% endcomment %}
