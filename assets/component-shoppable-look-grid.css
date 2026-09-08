@@ -4,7 +4,8 @@
 
 .shoppable-grid-section__heading {
   margin: 0 0 32px;
-  font-size: 32px;
+  font-size: 24px;
+  text-align: center;
   font-weight: 500;
   color: rgb(var(--color-foreground, 17 17 17));
 }
@@ -22,7 +23,8 @@
   }
 
   .shoppable-grid-section__heading {
-    font-size: 40px;
+    font-size: 36px;
+    text-align: left;
   }
 }
 
