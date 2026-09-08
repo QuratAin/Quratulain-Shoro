@@ -68,10 +68,67 @@
         "padding_bottom": 0,
         "color_scheme": ""
       }
+    },
+    "shoppable_look_grid_a3Pe3y": {
+      "type": "shoppable-look-grid",
+      "blocks": {
+        "title_QUQanE": {
+          "type": "title",
+          "settings": {
+            "product": ""
+          }
+        },
+        "title_DWm8Ah": {
+          "type": "title",
+          "settings": {
+            "product": ""
+          }
+        },
+        "title_YNwbtr": {
+          "type": "title",
+          "settings": {
+            "product": ""
+          }
+        },
+        "title_QBJAAr": {
+          "type": "title",
+          "settings": {
+            "product": ""
+          }
+        },
+        "title_TRyR7f": {
+          "type": "title",
+          "settings": {
+            "product": ""
+          }
+        },
+        "title_WJtnp3": {
+          "type": "title",
+          "settings": {
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "title_QUQanE",
+        "title_DWm8Ah",
+        "title_YNwbtr",
+        "title_QBJAAr",
+        "title_TRyR7f",
+        "title_WJtnp3"
+      ],
+      "name": "Shoppable Look Grid",
+      "settings": {
+        "heading": "Tisson vision in the world",
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "main",
-    "custom_hero_banner_PdG9cw"
+    "custom_hero_banner_PdG9cw",
+    "shoppable_look_grid_a3Pe3y"
   ]
 }
