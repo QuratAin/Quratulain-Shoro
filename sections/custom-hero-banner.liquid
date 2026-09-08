@@ -10,7 +10,15 @@
 <div class="gift-banner" id="GiftBanner-{{ section.id }}">
     {% comment %} top bar {% endcomment %}
     <div class="gift-banner__topbar">
+
         {% comment %} hamburger icon - mobile {% endcomment %}
+        <button class="gift-banner__hamburger" aria-label="Menu">
+            <svg viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 6H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 1H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 11H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
         
         {% comment %} logo {% endcomment %}
         <a href="{{ shop.url }}" class="gift-banner__logo" aria-label="tisso vision">
@@ -53,6 +61,7 @@
                 class="gift-banner__btn gift-banner__btn--choose" 
                 aria-label="Choose Gift"
             >
+                <span class="gift-banner__btn--fill" aria-hidden="true"></span>
                 <span class="gift-banner__btn-label">
                     {{ section.settings.choose_gift_label }}
                     <svg class="gift-banner__arrow" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,35 +75,7 @@
     {% comment %} main {% endcomment %}
     <div class="gift-banner__main">
         {% comment %} background image {% endcomment %}
-         {% if section.settings.background_image %}
-            {% liquid
-                assign mobile_image = section.settings.mobile_background_image | default: section.settings.background_image
-            %}
-            <picture>
-                <source 
-                    srcset="
-                        {{ mobile_image | image_url: width: 400 }} 400w,
-                        {{ mobile_image | image_url: width: 800 }} 800w,
-                        {{ mobile_image | image_url: width: 1200 }} 1200w
-                    " 
-                    media="(max-width: 749px)"
-                    sizes="100vw"
-                >
-                <img 
-                    srcset="
-                        {{ section.settings.background_image | image_url: width: 400 }} 400w,
-                        {{ section.settings.background_image | image_url: width: 800 }} 800w,
-                        {{ section.settings.background_image | image_url: width: 1200 }} 1200w 
-                    "
-                    src="{{ section.settings.background_image | image_url: width: 800 }}"
-                    sizes="100vw"
-                    alt="Hero Banner Background" class="gift-banner__background-image"
-                    loading="lazy"
-                    width="800"
-                    height="400"
-                    class="gift-banner__image"
-                >
-            </picture>
+        <img src="{{ section.settings.background_image | asset_url }}" alt="Hero Banner Background" class="gift-banner__background-image">
 
         {% comment %} main content {% endcomment %}
         <div class="gift-banner__content">
@@ -102,13 +83,26 @@
                 <h2 class="gift-banner__heading">{{ section.settings.heading }}</h2>
             {% endif %}
 
-            {% if section.settings.description %}
-                <div class="gift-banner__description">
+            {% if section.settings.mobile_description %}
+                <div class="gift-banner__description gift-banner__description--mobile">
+                    {{ section.settings.mobile_description }}
+                </div>
+            {% elsif section.settings.description %}
+                <div class="gift-banner__description gift-banner__description--mobile">
                     {{ section.settings.description }}
                 </div>
             {% endif %}
 
+            {% if section.settings.description %}
+                <div class="gift-banner__description gift-banner__description--desktop">
+                    {{ section.settings.description }}
+                </div>
+            {% endif %}
+
+            {% if section.settings.shop_now_label %}
+
             <a href="{{ section.settings.shop_now_link }}" class="gift-banner__btn gift-banner__btn--shop" aria-label="{{ section.settings.shop_now_label }}">
+                <span class="gift-banner__btn--fill" aria-hidden="true"></span>
                 <span class="gift-banner__btn-label">{{ section.settings.shop_now_label }}
                     <svg class="gift-banner__arrow" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.75 4.77298L7.37629e-08 4.77298L-7.37629e-08 6.27298L0.75 6.27298L0.75 4.77298ZM25.2803 6.05331C25.5732 5.76042 25.5732 5.28554 25.2803 4.99265L20.5074 0.21968C20.2145 -0.073213 19.7396 -0.0732131 19.4467 0.21968C19.1538 0.512574 19.1538 0.987447 19.4467 1.28034L23.6893 5.52298L19.4467 9.76562C19.1538 10.0585 19.1538 10.5334 19.4467 10.8263C19.7396 11.1192 20.2145 11.1192 20.5074 10.8263L25.2803 6.05331ZM0.75 6.27298L24.75 6.27298L24.75 4.77298L0.75 4.77298L0.75 6.27298Z" fill="black"/>
