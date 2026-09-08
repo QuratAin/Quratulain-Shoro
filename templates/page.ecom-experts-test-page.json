@@ -72,57 +72,63 @@
     "shoppable_look_grid_a3Pe3y": {
       "type": "shoppable-look-grid",
       "blocks": {
-        "title_QUQanE": {
-          "type": "title",
+        "tile_UNY8Uk": {
+          "type": "tile",
           "settings": {
             "product": "black-leather-bag"
           }
         },
-        "title_YNwbtr": {
-          "type": "title",
+        "tile_aGY3KT": {
+          "type": "tile",
           "settings": {
             "product": "blue-silk-tuxedo"
           }
         },
-        "title_QBJAAr": {
-          "type": "title",
+        "tile_NKwaDw": {
+          "type": "tile",
           "settings": {
             "product": "chequered-red-shirt"
           }
         },
-        "title_TRyR7f": {
-          "type": "title",
+        "tile_LXhJnT": {
+          "type": "tile",
           "settings": {
             "product": "classic-leather-jacket"
           }
         },
-        "title_WJtnp3": {
-          "type": "title",
+        "tile_fcXiUb": {
+          "type": "tile",
           "settings": {
             "product": "classic-varsity-top"
           }
         },
-        "title_DWm8Ah": {
-          "type": "title",
+        "tile_qTkcfd": {
+          "type": "tile",
           "settings": {
             "product": "dark-denim-top"
           }
         }
       },
       "block_order": [
-        "title_QUQanE",
-        "title_YNwbtr",
-        "title_QBJAAr",
-        "title_TRyR7f",
-        "title_WJtnp3",
-        "title_DWm8Ah"
+        "tile_UNY8Uk",
+        "tile_aGY3KT",
+        "tile_NKwaDw",
+        "tile_LXhJnT",
+        "tile_fcXiUb",
+        "tile_qTkcfd"
       ],
       "name": "Shoppable Look Grid",
       "settings": {
         "heading": "Tisson vision in the world",
         "columns_desktop": 3,
         "columns_mobile": "2",
-        "color_scheme": ""
+        "color_scheme": "",
+        "bundle_product": "",
+        "bundle_trigger_value_1": "Black",
+        "bundle_trigger_value_2": "Medium",
+        "bundle_message": "Added to cart — your bundle item was included.",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
