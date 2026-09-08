@@ -16,9 +16,18 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "custom_hero_banner_PdG9cw": {
+      "type": "custom-hero-banner",
+      "name": "Hero Banner",
+      "settings": {
+        "heading": "Custom Hero Banner",
+        "subheading": "This is a custom hero banner section."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_hero_banner_PdG9cw"
   ]
 }
