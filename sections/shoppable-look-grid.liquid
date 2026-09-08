@@ -154,11 +154,28 @@
                   <div class="quick-view-dialog__description">{{ product.description }}</div>
                 {%- endif -%}
 
+                {%- liquid
+                  assign has_color_option = false
+                  for option in product.options_with_values
+                    assign option_name_downcase = option.name | downcase
+                    if option_name_downcase == 'color' or option_name_downcase == 'colour'
+                      assign has_color_option = true
+                    endif
+                  endfor
+                -%}
+
                 <div class="quick-view-dialog__options">
                   {%- for option in product.options_with_values -%}
-                    <div class="quick-view-dialog__option">
-                      <p class="quick-view-dialog__option-label">{{ option.name }}</p>
-                      {%- if forloop.first -%}
+                    {%- assign option_name_downcase = option.name | downcase -%}
+                    {%- assign is_swatch_option = false -%}
+                    {%- if option_name_downcase == 'color' or option_name_downcase == 'colour' -%}
+                      {%- assign is_swatch_option = true -%}
+                    {%- elsif has_color_option == false and forloop.first -%}
+                      {%- assign is_swatch_option = true -%}
+                    {%- endif -%}
+                    {%- if is_swatch_option -%}
+                      <div class="quick-view-dialog__option">
+                        <p class="quick-view-dialog__option-label">{{ option.name }}</p>
                         <div class="quick-view-dialog__swatches" data-option-index="{{ forloop.index0 }}" role="radiogroup" aria-label="{{ option.name }}">
                           {%- for value in option.values -%}
                             <button
@@ -171,7 +188,21 @@
                             </button>
                           {%- endfor -%}
                         </div>
-                      {%- else -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- for option in product.options_with_values -%}
+                    {%- assign option_name_downcase = option.name | downcase -%}
+                    {%- assign is_swatch_option = false -%}
+                    {%- if option_name_downcase == 'color' or option_name_downcase == 'colour' -%}
+                      {%- assign is_swatch_option = true -%}
+                    {%- elsif has_color_option == false and forloop.first -%}
+                      {%- assign is_swatch_option = true -%}
+                    {%- endif -%}
+                    {%- unless is_swatch_option -%}
+                      <div class="quick-view-dialog__option">
+                        <p class="quick-view-dialog__option-label">{{ option.name }}</p>
                         <div class="quick-view-dialog__select-wrap">
                           <select class="quick-view-dialog__select" data-option-index="{{ forloop.index0 }}" aria-label="{{ option.name }}">
                             <option value="" disabled selected>Choose your {{ option.name | downcase }}</option>
@@ -180,8 +211,8 @@
                             {%- endfor -%}
                           </select>
                         </div>
-                      {%- endif -%}
-                    </div>
+                      </div>
+                    {%- endunless -%}
                   {%- endfor -%}
                 </div>
 
