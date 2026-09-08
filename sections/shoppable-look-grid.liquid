@@ -96,6 +96,22 @@
                 </svg>
               </span>
             </button>
+
+            <button
+              type="button"
+              class="shoppable-tile__minicard"
+              data-tile-minicard
+              aria-haspopup="dialog"
+              aria-controls="QuickView-{{ section.id }}-{{ block.id }}"
+            >
+              <span class="shoppable-tile__minicard-image">
+                {{ product.featured_image | image_url: width: 160 | image_tag: alt: product.title, loading: 'lazy' }}
+              </span>
+              <span class="shoppable-tile__minicard-info">
+                <span class="shoppable-tile__minicard-title">{{ product.title }}</span>
+                <span class="shoppable-tile__minicard-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+              </span>
+            </button>
           {%- endif -%}
         </div>
       {%- endfor -%}
