@@ -1,12 +1,14 @@
 {{  'components/hero-banner.css' | asset_url | stylesheet_tag }}
 
-<div>
-    custom hero banner
+<div class="gift-banner" id="GiftBanner-{{ section.id }}">
+    <div class="gift-banner__topbar">
+        <h1>{{ section.settings.heading }}</h1>
+    </div>
 </div>
 
 {% schema %}
   {
-    "name": "Custom Hero Banner",
+    "name": "Hero Banner",
     "tag": "section",
     "class": "section",
     "settings": [
@@ -21,6 +23,11 @@
             "id": "subheading",
             "label": "Subheading",
             "default": "This is a custom hero banner section."
+        }
+    ],
+    "presets": [
+        {
+            "name": "Hero Banner"
         }
     ]
   }
