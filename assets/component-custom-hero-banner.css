@@ -84,7 +84,7 @@
 .gift-banner__content {
   position: static;
   text-align: center;
-  padding: 40px 30px 0px 30px !important;
+  padding: 40px 30px 0px 30px;
 }
 
 .gift-banner__heading {
