@@ -5,27 +5,40 @@
   
 {% endstyle %}
 
-<div class="shoppable-look-grid section {{ section.settings.color_scheme }} {% if section.settings.heading != blank %}has-heading{% endif %}" data-section-id="{{ section.id }}" data-section-type="shoppable-look-grid">
-  <div class="shoppable-look-grid__inner page-width">
+<div 
+    id="ShopTheLook-{{ section.id }}"
+    class="shoppable-grid section color-{{ section.settings.color_scheme }}"
+>
+  <div class="page-width">
     {% if section.settings.heading != blank %}
-      <h2 class="shoppable-look-grid__heading heading h2">{{ section.settings.heading }}</h2>
+      <h2 class="shoppable-grid__heading">{{ section.settings.heading }}</h2>
     {% endif %}
-    <div class="shoppable-look-grid__grid" style="--columns-desktop: {{ section.settings.columns_desktop }}; --columns-mobile: {{ section.settings.columns_mobile }}">
+
+    <div class="shoppable-grid">
       {% for block in section.blocks %}
-        {% assign product = all_products[block.settings.product] %}
+        {% assign product = block.settings.product %}
+        <div class="shoppable__tile" data-tile {{ block.shopify_attributes }}>
         {% if product %}
-          <div class="shoppable-look-grid__item">
-            <a href="{{ product.url }}" class="shoppable-look-grid__link">
-              <div class="shoppable-look-grid__image-wrapper">
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" class="shoppable-look-grid__image" />
-                {% else %}
-                  <div class="shoppable-look-grid__placeholder"></div>
-                {% endif %}
-              </div>
-              <span class="shoppable-look-grid__title">{{ product.title }}</span>
-            </a>
-          </div>
+            <div class="shoppable-tile__media">
+              {%- if block.settings.image -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 400 }} 400w,
+                    {{ block.settings.image | image_url: width: 800 }} 800w,
+                    {{ block.settings.image | image_url: width: 1200 }} 1200w
+                  "
+                  sizes="(min-width: 750px) 33vw, 50vw"
+                  alt="{{ block.settings.image.alt | default: product.title | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  class="shoppable-tile__image"
+                >
+              {%- else -%}
+                {{ product.featured_image | image_url: width: 800 | image_tag: class: 'shoppable-tile__image', sizes: '(min-width: 750px) 33vw, 50vw', alt: product.title }}
+              {%- endif -%}
+            </div>
         {% endif %}
       {% endfor %}
     </div>
