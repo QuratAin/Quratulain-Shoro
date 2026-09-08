@@ -151,7 +151,7 @@
 .gift-banner__btn-label {
   position: relative;
   z-index: 1;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 14px;
   transition: color 0.3s ease;
@@ -303,9 +303,6 @@
   .gift-banner__btn--shop {
     width: 193px;
     height: 45px;
-    padding-top: 13px;
-    padding-right: 20px;
-    padding-bottom: 13px;
-    padding-left: 20px;
+    padding: 11px 0px 11px 30px;
   }
 }
