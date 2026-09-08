@@ -112,6 +112,95 @@
                 <span class="shoppable-tile__minicard-price">{{ product.selected_or_first_available_variant.price | money }}</span>
               </span>
             </button>
+
+            <dialog
+              id="QuickView-{{ section.id }}-{{ block.id }}"
+              class="quick-view-dialog"
+              data-quick-view
+              aria-label="{{ product.title | escape }}"
+            >
+              <div class="quick-view-dialog__inner">
+                <button type="button" class="quick-view-dialog__close" data-quick-view-close aria-label="{{ 'accessibility.close' | t: default: 'Close' }}">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 13.9994L13.7279 1.2715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1 1L13.7279 13.7279" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+
+                <div class="quick-view-dialog__header">
+                  <div class="quick-view-dialog__thumb">
+                    {{ product.featured_image | image_url: width: 200 | image_tag: alt: product.title }}
+                  </div>
+                  <div class="quick-view-dialog__header-text">
+                    <h3 class="quick-view-dialog__title">{{ product.title }}</h3>
+                    <p class="quick-view-dialog__price" data-quick-view-price>{{ product.selected_or_first_available_variant.price | money }}</p>
+                  </div>
+                </div>
+
+                {%- if product.description != blank -%}
+                  <div class="quick-view-dialog__description">{{ product.description }}</div>
+                {%- endif -%}
+
+                <div class="quick-view-dialog__options">
+                  {%- for option in product.options_with_values -%}
+                    <div class="quick-view-dialog__option">
+                      <p class="quick-view-dialog__option-label">{{ option.name }}</p>
+                      {%- if forloop.first -%}
+                        <div class="quick-view-dialog__swatches" data-option-index="{{ forloop.index0 }}" role="radiogroup" aria-label="{{ option.name }}">
+                          {%- for value in option.values -%}
+                            <button
+                              type="button"
+                              class="quick-view-dialog__swatch{% if forloop.first %} is-selected{% endif %}"
+                              data-option-value="{{ value | escape }}"
+                              aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                            >
+                              {{ value }}
+                            </button>
+                          {%- endfor -%}
+                        </div>
+                      {%- else -%}
+                        <div class="quick-view-dialog__select-wrap">
+                          <select class="quick-view-dialog__select" data-option-index="{{ forloop.index0 }}" aria-label="{{ option.name }}">
+                            <option value="" disabled selected>Choose your {{ option.name | downcase }}</option>
+                            {%- for value in option.values -%}
+                              <option value="{{ value | escape }}">{{ value }}</option>
+                            {%- endfor -%}
+                          </select>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+
+                <button
+                  type="button"
+                  class="quick-view-dialog__add-to-cart"
+                  data-quick-view-add-to-cart
+                >
+                  <span class="quick-view-dialog__add-fill" aria-hidden="true"></span>
+                  <span class="quick-view-dialog__add-label">
+                    <span data-quick-view-add-text>{{ 'products.product.add_to_cart' | t: default: 'Add to cart' }}</span>
+                    <svg viewBox="0 0 68 30" fill="none" aria-hidden="true" class="quick-view-dialog__arrow">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.7279L1.96701e-07 12.7279L-1.96701e-07 16.7279L2 16.7279L2 12.7279ZM67.4142 16.1421C68.1953 15.3611 68.1953 14.0947 67.4142 13.3137L54.6863 0.585774C53.9052 -0.195275 52.6389 -0.195275 51.8579 0.585774C51.0768 1.36682 51.0768 2.63315 51.8579 3.4142L63.1716 14.7279L51.8579 26.0416C51.0768 26.8227 51.0768 28.089 51.8579 28.87C52.6389 29.6511 53.9052 29.6511 54.6863 28.87L67.4142 16.1421ZM2 16.7279L66 16.7279L66 12.7279L2 12.7279L2 16.7279Z" fill="currentColor"/>
+                    </svg>
+                  </span>
+                </button>
+                <p class="quick-view-dialog__status" data-quick-view-status role="status" aria-live="polite"></p>
+              </div>
+
+              <script type="application/json" data-quick-view-variants>
+                [
+                  {%- for variant in product.variants -%}
+                    {
+                      "id": {{ variant.id | json }},
+                      "available": {{ variant.available | json }},
+                      "price": {{ variant.price | money | json }},
+                      "options": {{ variant.options | json }}
+                    }{% unless forloop.last %},{% endunless %}
+                  {%- endfor -%}
+                ]
+              </script>
+            </dialog>
           {%- endif -%}
         </div>
       {%- endfor -%}
