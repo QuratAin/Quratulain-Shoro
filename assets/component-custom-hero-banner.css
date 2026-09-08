@@ -183,10 +183,6 @@
   height: 44px;
 }
 
-.gift-banner__btn--choose .gift-banner__btn-label {
-    padding: 11.67px 41px;
-}
-
 .gift-banner__btn--choose .gift-banner__btn-fill {
   background: var(--gb-choose-hover-bg);
 }
@@ -209,10 +205,6 @@
   z-index: 2;
   width: 220px;
   height: 50px;
-}
-
-.gift-banner__btn--shop .gift-banner__btn-label {
-    padding: 14.26px 55.07px;
 }
 
 .gift-banner__btn--shop .gift-banner__btn-fill {
