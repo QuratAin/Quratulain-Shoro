@@ -113,7 +113,6 @@
   align-items: center;
   isolation: isolate;
   overflow: hidden;
-  border-radius: 4px;
   text-decoration: none;
   white-space: nowrap;
   text-transform: uppercase;
