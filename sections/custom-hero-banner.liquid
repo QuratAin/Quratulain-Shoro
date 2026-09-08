@@ -119,107 +119,341 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Hero Banner",
-    "tag": "section",
-    "class": "section",
-    "settings": [
-        {
-            "type": "header",
-            "content": "Top Bar"
-        },
-        {
-            "type": "text",
-            "id": "logo_text",
-            "label": "Logo text",
-            "default": "Tisso Vision"
-        },
-        {
-            "type": "image_picker",
-            "id": "logo_image",
-            "label": "Logo image",
-            "info": "Upload a logo image to display in the top bar. Leave empty to use the logo text instead."
-        },
-        {
-            "type": "text",
-            "id": "top_bar_text",
-            "label": "Top bar message",
-            "default": "Find the ideal gift for your loved ones"
-        },
-        {
-            "type": "text",
-            "id": "choose_gift_label",
-            "label": "Button label",
-            "default": "Choose Gift"
-        },
-        {
-            "type": "url",
-            "id": "choose_gift_link",
-            "label": "Button link",
-            "default": "/collections/all"
-        },
-        {
-            "type": "header",
-            "content": "Main Content"
-        },
-        {
-            "type": "image_picker",
-            "id": "background_image",
-            "label": "Background image - desktop",
-            "info": "Upload a dbackground image for the hero banner."
-        },
-        {
-            "type": "image_picker",
-            "id": "mobile_background_image",
-            "label": "Background image - mobile",
-            "info": "Upload a background image for the hero banner on mobile devices."
-        },
-        {
-            "type": "text",
-            "id": "heading",
-            "label": "Heading",
-            "default": "The Gift Guide"
-        },
-        {
-            "type": "richtext",
-            "id": "description",
-            "label": "Description - desktop",
-            "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>"
-        },
-        {
-            "type": "richtext",
-            "id": "mobile_description",
-            "label": "Description - mobile",
-            "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination.</p>",
-            "info": "Leave empty to reuse the desktop description"
-        },
-        {
-            "type": "text",
-            "id": "shop_now_label",
-            "label": "Button label",
-            "default": "Shop Now"
-        },
-        {
-            "type": "url",
-            "id": "shop_now_link",
-            "label": "Button link",
-            "default": "/collections/all"
-        },
-        {
-            "type": "header",
-            "content": "Bottom Bar"
-        },
-        {
-            "type": "text",
-            "id": "bottom_bar_text",
-            "label": "Bottom bar message",
-            "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
-        }
-    ],
-    "presets": [
-        {
-            "name": "Hero Banner"
-        }
-    ]
-  }
+{
+  "name": "The Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top bar"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "TISSO VISON"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image",
+      "info": "Leave empty to use the default TISSO VISON wordmark"
+    },
+    {
+      "type": "text",
+      "id": "top_bar_text",
+      "label": "Top bar message",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "range",
+      "id": "top_bar_font_size",
+      "label": "Top bar text size (desktop)",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "text",
+      "id": "choose_gift_label",
+      "label": "Button label",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "choose_gift_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "choose_gift_font_size",
+      "label": "Button text size (desktop)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "header",
+      "content": "Main content"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background illustration"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 32,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 82
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Description text size (desktop)",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "shop_now_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "shop_now_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "shop_now_font_size",
+      "label": "Button text size (desktop)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 19
+    },
+    {
+      "type": "header",
+      "content": "Content positioning"
+    },
+    {
+      "type": "paragraph",
+      "content": "Nudge these so the heading/description/button land in the empty area of your background illustration."
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content column width (desktop)",
+      "min": 320,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 640
+    },
+    {
+      "type": "range",
+      "id": "content_padding_left",
+      "label": "Content left offset (desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "content_padding_top",
+      "label": "Content top offset",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "content_padding_bottom",
+      "label": "Content bottom offset",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "text",
+      "id": "bottom_bar_text",
+      "label": "Bottom bar text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+    {
+      "type": "range",
+      "id": "bottom_bar_font_size",
+      "label": "Bottom bar text size (desktop)",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_bg",
+      "label": "Top bar background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_text_color",
+      "label": "Top bar text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_bg",
+      "label": "Bottom bar background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_text_color",
+      "label": "Bottom bar text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "\"Choose gift\" button"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_bg",
+      "label": "Background",
+      "default": "#fff544"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_text",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_hover_bg",
+      "label": "Hover background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "choose_gift_hover_text",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "\"Shop now\" button"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_bg",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_text",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_hover_bg",
+      "label": "Hover background",
+      "default": "#fff544"
+    },
+    {
+      "type": "color",
+      "id": "shop_now_hover_text",
+      "label": "Hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Banner"
+    }
+  ]
+}
 {% endschema %}
