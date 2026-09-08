@@ -1,32 +1,51 @@
 (function () {
-    function setupTile(tile) {
+
+  function closeAllTiles(except) {
+    document.querySelectorAll('.shoppable-tile.is-open').forEach(function (tile) {
+      if (tile !== except) {
+        tile.classList.remove('is-open');
         var toggle = tile.querySelector('[data-tile-toggle]');
-        var minicard = tile.querySelector('[data-tile-minicard]');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
-        if (toggle) {
-        toggle.addEventListener('click', function (event) {
-            event.stopPropagation();
-            var isOpen = tile.classList.contains('is-open');
-            closeAllTiles(tile);
-            tile.classList.toggle('is-open', !isOpen);
-            toggle.setAttribute('aria-expanded', String(!isOpen));
-        });
-        }
+  function setupTile(tile) {
+    var toggle = tile.querySelector('[data-tile-toggle]');
+    var minicard = tile.querySelector('[data-tile-minicard]');
 
-        if (minicard) {
-        minicard.addEventListener('click', function (event) {
-            event.stopPropagation();
-            var dialog = document.getElementById(minicard.getAttribute('aria-controls'));
-            tile.classList.remove('is-open');
-            if (toggle) toggle.setAttribute('aria-expanded', 'false');
-            if (dialog) dialog.showModal();
-        });
-        }
+    if (toggle) {
+      toggle.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var isOpen = tile.classList.contains('is-open');
+        closeAllTiles(tile);
+        tile.classList.toggle('is-open', !isOpen);
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+      });
     }
 
-    function init() {
-        document.querySelectorAll('[data-tile').forEach(setupTile);
+    if (minicard) {
+      minicard.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var dialog = document.getElementById(minicard.getAttribute('aria-controls'));
+        tile.classList.remove('is-open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        if (dialog) dialog.showModal();
+      });
     }
+  }
 
-    init();
+  function init() {
+    document.querySelectorAll('[data-tile]').forEach(setupTile);
+
+    document.addEventListener('click', function () {
+      closeAllTiles();
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') closeAllTiles();
+    });
+  }
+
+  init();
 })();
