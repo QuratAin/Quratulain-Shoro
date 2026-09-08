@@ -44,3 +44,37 @@
   object-fit: cover;
   display: block;
 }
+
+.shoppable-tile__icon-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.shoppable-tile__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.shoppable-tile__icon--cross {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.shoppable-tile.is-open .shoppable-tile__icon--plus {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.shoppable-tile.is-open .shoppable-tile__icon--cross {
+  opacity: 1;
+  visibility: visible;
+}
